@@ -1,6 +1,7 @@
 <template>
   <div id="todoList">
     <h1>Todo List</h1>
+    <!--deal with the todos we want to add-->
     <todo-add v-on:add="addTodo"></todo-add>
     <ul class="todos">
       <li v-for="todo, index in todos" class="todo">
@@ -9,10 +10,11 @@
           name=""
           value=""
           :checked="todo.isfinished"
-          
+          @click="finished (index)" 
         >
         <span
-          :class="todo.isfinished ? 'finished' : ''"   
+          :class="todo.isfinished ? 'finished' : ''"
+          @click="finished (index)"   
         >
           <em>{{ index }}.</em>{{ todo.text }}
         </span>
@@ -24,6 +26,7 @@
 export default {
   name: 'TodoList',
   data: () => ({
+    // use array to save todos
     todos: [{
       text: '吃饭',
       isfinished: false
@@ -34,7 +37,13 @@ export default {
       text: '学习',
       isfinished: false
     }]
-  })
+  }),
+  methods: {
+    // deal with the status of todos
+    finished (index) {
+      this.todos[index].isfinished = !this.todos[index].isfinished
+    }
+  }
 }
 </script>
 <style scoped>
