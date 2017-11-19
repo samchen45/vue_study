@@ -14,6 +14,7 @@
       name="button"
       @click = "addTodo"
     >
+        ADD
     </button>
   </div>
 </template>
@@ -37,6 +38,6 @@ export default {
 </script>
 <style scoped>
 .input {
-    min-width: 200px;
+    min-width: 300px;
 }
 </style>

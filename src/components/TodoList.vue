@@ -3,8 +3,10 @@
     <h1>Todo List</h1>
     <!--deal with the todos we want to add-->
     <todo-add v-on:add="addTodo"></todo-add>
+    <!--deal with the status of todos-->
     <ul class="todos">
       <li v-for="todo, index in todos" class="todo">
+        <!--click on the checkbox to make the todo finished-->
         <input
           type="checkbox"
           name=""
@@ -13,6 +15,7 @@
           @click="finished (index)"
         >
         </input>
+        <!--click on the todo to make the todo finished-->
         <span
           :class="todo.isFinished ? 'finished' : ''"
           @click="finished (index)"
@@ -21,6 +24,15 @@
         </span>
       </li>
     </ul>
+    <div>
+      <p v-show="todos.length === 0">
+        Congraduations! All things have been finished!
+      </p>
+      <p v-show="todos.length !== 0">
+        {{ count_finished }} things has been finished. 
+        {{ count_n_finished }} things waiting to be finished in <strong>{{ todos.length }}</strong> things
+      </p>
+    </div>
   </div>
 </template>
 <script>
@@ -31,10 +43,10 @@ export default {
     TodoAdd
   },
   data: () => ({
-    // use array to save todos
+    // use array to save todos, here i use some examples to show the web
     todos: [{
       text: '吃',
-      isFinished: false
+      isFinished: true
     }, {
       text: '睡觉',
       isFinished: false
@@ -55,13 +67,21 @@ export default {
         isFinished: false
       })
     }
+  },
+  computed: {
+    count_finished: function () {
+      return this.todos.filter(item => item.isFinished).length
+    },
+    count_n_finished: function () {
+      return this.todos.filter(item => !item.isFinished).length
+    }
   }
 }
 </script>
 <style scoped>
 #todoList {
   margin: 0 auto;
-  max-width: 350px;
+  max-width: 400px;
 }
 
 .todos li {
