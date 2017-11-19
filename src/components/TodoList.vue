@@ -9,12 +9,13 @@
           type="checkbox"
           name=""
           value=""
-          :checked="todo.isfinished"
-          @click="finished (index)" 
+          :checked="todo.isFinished"
+          @click="finished (index)"
         >
+        </input>
         <span
-          :class="todo.isfinished ? 'finished' : ''"
-          @click="finished (index)"   
+          :class="todo.isFinished ? 'finished' : ''"
+          @click="finished (index)"
         >
           <em>{{ index }}.</em>{{ todo.text }}
         </span>
@@ -23,25 +24,36 @@
   </div>
 </template>
 <script>
+import TodoAdd from './TodoAdd.vue'
 export default {
   name: 'TodoList',
+  components: {
+    TodoAdd
+  },
   data: () => ({
     // use array to save todos
     todos: [{
-      text: '吃饭',
-      isfinished: false
+      text: '吃',
+      isFinished: false
     }, {
       text: '睡觉',
-      isfinished: false
+      isFinished: false
     }, {
       text: '学习',
-      isfinished: false
+      isFinished: false
     }]
   }),
   methods: {
     // deal with the status of todos
-    finished (index) {
-      this.todos[index].isfinished = !this.todos[index].isfinished
+    finished: function (index) {
+      this.todos[index].isFinished = !this.todos[index].isFinished
+    },
+    // add new todo
+    addTodo: function (todo) {
+      this.todos.push({
+        text: todo,
+        isFinished: false
+      })
     }
   }
 }
