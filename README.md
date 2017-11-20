@@ -19,3 +19,9 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+# introduction
+this is a vue.js project using to save the  things user wants to do.
+
+# Problems
+fail to make a unit test
